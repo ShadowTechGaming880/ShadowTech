@@ -999,3 +999,23 @@ nav {
         width: 115px;
     }
 }
+
+/* FIX SHADOWTECH LOGO DISPLAY */
+
+.brand-logo {
+    display: inline-flex !important;
+    align-items: center;
+    visibility: visible;
+    opacity: 1;
+    flex-shrink: 0;
+}
+
+.brand-logo img {
+    display: block !important;
+    width: 150px;
+    height: auto;
+    max-width: 100%;
+    visibility: visible;
+    opacity: 1;
+    object-fit: contain;
+}
