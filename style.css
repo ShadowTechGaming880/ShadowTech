@@ -740,3 +740,262 @@ footer {
         gap: 20px;
     }
 }
+
+/* SHADOWTECH PREMIUM UPGRADE */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #080b09;
+    color: #f5f7f5;
+}
+
+section {
+    scroll-margin-top: 90px;
+}
+
+button,
+.btn,
+a {
+    transition: all 0.25s ease;
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(57, 255, 20, 0.25);
+}
+
+.game-card,
+.news-card,
+.card {
+    border: 1px solid rgba(57, 255, 20, 0.12);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.game-card:hover,
+.news-card:hover,
+.card:hover {
+    transform: translateY(-6px);
+    border-color: #39ff14;
+    box-shadow: 0 8px 28px rgba(57, 255, 20, 0.10);
+}
+
+img {
+    max-width: 100%;
+}
+
+::selection {
+    background: #39ff14;
+    color: #080b09;
+}
+
+:focus-visible {
+    outline: 2px solid #39ff14;
+    outline-offset: 4px;
+}
+
+/* SHADOWTECH RESPONSIVE UPGRADE */
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+header {
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.hero {
+    width: 100%;
+    min-height: 420px;
+    padding: 70px 6%;
+    background-position: center;
+    background-size: cover;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 16px;
+    }
+
+    nav {
+        gap: 10px;
+        justify-content: center;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .hero {
+        min-height: 350px;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: clamp(28px, 7vw, 42px);
+    }
+
+    .hero p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    button,
+    .btn {
+        max-width: 100%;
+    }
+
+    section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+@media (max-width: 420px) {
+    nav {
+        gap: 8px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .hero {
+        min-height: 300px;
+        padding: 40px 14px;
+    }
+}
+
+/* SHADOWTECH PREMIUM HERO */
+
+.hero {
+    position: relative;
+    isolation: isolate;
+    border-bottom: 1px solid rgba(57, 255, 20, 0.18);
+}
+
+.hero h1 {
+    max-width: 850px;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.hero h1 span {
+    color: #39ff14;
+    text-shadow: 0 0 22px rgba(57, 255, 20, 0.22);
+}
+
+.hero p {
+    max-width: 600px;
+    line-height: 1.8;
+    color: #c3cbc4;
+}
+
+.hero button,
+.hero .btn {
+    border-radius: 8px;
+    padding: 14px 24px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.hero button:hover,
+.hero .btn:hover {
+    box-shadow: 0 0 24px rgba(57, 255, 20, 0.3);
+}
+
+/* SHADOWTECH PREMIUM GAME CARDS */
+
+.game-card {
+    background: linear-gradient(145deg, #151a16, #0b0e0c);
+    border: 1px solid #252d26;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-8px);
+    border-color: #39ff14;
+    box-shadow: 0 12px 30px rgba(57, 255, 20, 0.13);
+}
+
+.game-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.game-card:hover img {
+    transform: scale(1.04);
+}
+
+.game-card h3 {
+    color: #f5f7f5;
+    margin: 16px 16px 8px;
+}
+
+.game-card p {
+    color: #aab4ab;
+    line-height: 1.6;
+    margin: 0 16px 16px;
+}
+
+.game-card button,
+.game-card .btn {
+    margin: 0 16px 18px;
+    border-radius: 7px;
+    font-weight: 700;
+}
+
+/* SHADOWTECH HEADER LOGO */
+
+.brand-logo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.brand-logo img {
+    display: block;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 480px) {
+    .brand-logo img {
+        width: 115px;
+    }
+}
