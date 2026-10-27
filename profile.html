@@ -8,12 +8,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section class="auth-container">
-        <h1>My <span>Profile</span></h1>
-        <p id="profileMessage">Checking your account...</p>
-        <p id="profileEmail"></p>
-        <button id="logoutButton">Log Out</button>
-        <p><a href="index.html">Back to ShadowTech</a></p>
+    <section class="auth-container gamer-profile">
+        <div class="gamer-avatar">🎮</div>
+
+        <h1>Gamer <span>Profile</span></h1>
+        <p>Your ShadowTech gaming account</p>
+
+        <div class="profile-details">
+            <p>USERNAME</p>
+            <h2 id="profileName">Loading...</h2>
+
+            <p>EMAIL ADDRESS</p>
+            <h3 id="profileEmail">Loading...</h3>
+        </div>
+
+        <button id="logoutButton" hidden>Log Out</button>
+
+        <p><a href="index.html">← Back to ShadowTech</a></p>
     </section>
 
     <script type="module" src="profile.js"></script>

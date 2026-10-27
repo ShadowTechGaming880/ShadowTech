@@ -5,11 +5,9 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-const message = document.getElementById("profileMessage");
-const email = document.getElementById("profileEmail");
+const profileName = document.getElementById("profileName");
+const profileEmail = document.getElementById("profileEmail");
 const logoutButton = document.getElementById("logoutButton");
-
-logoutButton.hidden = true;
 
 onAuthStateChanged(auth, (user) => {
     if (!user) {
@@ -17,8 +15,8 @@ onAuthStateChanged(auth, (user) => {
         return;
     }
 
-    message.textContent = `Welcome, ${user.displayName || "Gamer"}! 🎮`;
-    email.textContent = user.email || "";
+    profileName.textContent = user.displayName || "Gamer";
+    profileEmail.textContent = user.email || "No email available";
     logoutButton.hidden = false;
 });
 
@@ -27,6 +25,7 @@ logoutButton.addEventListener("click", async () => {
         await signOut(auth);
         window.location.replace("index.html");
     } catch (error) {
-        message.textContent = "Logout failed. Please try again.";
+        alert("Could not log out. Please try again.");
+        console.error(error);
     }
 });
