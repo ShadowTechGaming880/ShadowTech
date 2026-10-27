@@ -8,23 +8,26 @@
 </head>
 <body>
 
-    <header>
-       
-<a href="index.html" class="brand-logo">
-    <img src="shadowtech-logo.png" alt="ShadowTech logo">
-</a>
+   
+<header>
+    <a href="index.html" class="brand-logo">
+        <img src="shadowtech-logo.png" alt="ShadowTech logo">
+    </a>
 
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#games">Games</a>
+        <a href="#news">Gaming News</a>
+        <a href="#checker">PC Game Checker</a>
+        <a href="#trending">Trending</a>
 
-        <nav>
-            <a href="#">Home</a>
-            <a href="#games">Games</a>
-            <a href="#news">Gaming News</a>
-            <a href="#checker">PC Game Checker</a>
-            <a href="#trending">Trending</a>
-            <a href="login.html" class="auth-link">Login</a>
-            <a href="signup.html" class="auth-button">Sign Up</a>
-        </nav>
-    </header>
+        <a href="login.html" class="auth-link" id="loginLink">Login</a>
+        <a href="signup.html" class="auth-button" id="signupLink">Sign Up</a>
+        <span id="userGreeting" hidden></span>
+        <button id="logoutButton" hidden>Log Out</button>
+    </nav>
+</header>
+
 
     <main>
       
@@ -297,5 +300,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script type="module" src="auth-state.js"></script>
 </body>
 </html>

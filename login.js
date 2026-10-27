@@ -1,7 +1,10 @@
 
 import { auth } from "./firebase.js";
+
 import {
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    setPersistence,
+    browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 const form = document.getElementById("loginForm");
@@ -16,14 +19,13 @@ form.addEventListener("submit", async (event) => {
     message.textContent = "Logging in...";
 
     try {
-        const result = await signInWithEmailAndPassword(
-            auth, email, password
-        );
+        await setPersistence(auth, browserLocalPersistence);
 
-        message.textContent =
-            `Welcome back, ${result.user.displayName || "gamer"}! 🎮`;
+        await signInWithEmailAndPassword(auth, email, password);
 
-        form.reset();
+        message.textContent = "Login successful! Redirecting...";
+
+        window.location.href = "index.html";
     } catch (error) {
         const messages = {
             "auth/invalid-credential":
