@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | ShadowTech</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="auth-container">
+        <h1>Welcome Back to <span>ShadowTech</span></h1>
+        <p>Log in to your gaming account</p>
+
+        <form id="loginForm">
+            <input
+                id="email"
+                type="email"
+                placeholder="Email address"
+                autocomplete="email"
+                required
+            >
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit">Log In</button>
+            <p id="message" role="status"></p>
+        </form>
+
+        <p>New to ShadowTech? <a href="signup.html">Create an account</a></p>
+        <a href="index.html">← Back to ShadowTech</a>
+    </section>
+
+    <script type="module" src="login.js"></script>
+</body>
+</html>
