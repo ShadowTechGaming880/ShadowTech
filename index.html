@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,299 +8,265 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-   
-<header>
+<header class="topbar">
     <a href="index.html" class="brand-logo">
         <img src="shadowtech-logo.png" alt="ShadowTech logo">
     </a>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="#games">Games</a>
-        <a href="#news">Gaming News</a>
-        <a href="#checker">PC Game Checker</a>
-        <a href="#trending">Trending</a>
-        <a href="profile.html" id="profileLink" hidden>Profile</a>
+    <label class="global-search">
+        <span aria-hidden="true">⌕</span>
+        <input type="search" id="siteSearch" placeholder="Search games, people, or topics..." aria-label="Search games, people, or topics">
+    </label>
+    <div class="topbar-account">
+        <span class="topbar-icon" aria-hidden="true">♧</span>
+        <a href="profile.html" id="profileLink" class="profile-link" hidden>
+            <img id="navProfilePicture" src="" alt="My profile">
+        </a>
+        <span id="userGreeting" hidden></span>
         <a href="login.html" class="auth-link" id="loginLink">Login</a>
         <a href="signup.html" class="auth-button" id="signupLink">Sign Up</a>
-        <span id="userGreeting" hidden></span>
         <button id="logoutButton" hidden>Log Out</button>
-    </nav>
+    </div>
 </header>
 
+<main>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <nav class="side-nav" aria-label="Main navigation">
+                <a class="active" href="#home">⌂ <span>Home</span></a>
+                <a href="#community">♧ <span>Community</span></a>
+                <a href="#games">🎮 <span>Games</span></a>
+                <a href="#news">▤ <span>Gaming News</span></a>
+                <a href="#trending">⌁ <span>Trending</span></a>
+                <a href="#checker">▣ <span>PC Game Checker</span></a>
+            </nav>
+            <div class="sidebar-promo">
+                <div class="promo-crown">♛</div>
+                <h3>Level Up Your Gaming Experience</h3>
+                <p>Discover games, share your wins, and connect with gamers.</p>
+                <a href="#community" class="promo-button">Explore Community →</a>
+            </div>
+        </aside>
 
-    <main>
-      
-<section id="home" class="hero">
-    <div class="hero-content">
-        <span class="hero-badge">
-            ⚡ YOUR NEXT LEVEL STARTS HERE
-        </span>
+        <div class="dashboard-main">
+            <section id="home" class="dashboard-banner">
+                <div class="banner-copy">
+                    <span class="hero-badge">⚡ PLAY · CONNECT · GROW</span>
+                    <h1>SHADOW<span>TECH</span></h1>
+                    <h2>A Gaming Community Built for Gamers</h2>
+                    <p>Share. Play. Discuss. Be part of a community that loves games as much as you do.</p>
+                </div>
+            </section>
 
-        <h1>
-            LEVEL UP YOUR<br>
-            <span>GAMING WORLD.</span>
-        </h1>
-
-        <p>
-            Discover trending games, explore the latest gaming news,
-            and find out which games your PC can handle.
-            Everything a gamer needs, in one place.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="#trending" class="hero-btn primary-btn">
-                Explore Games ↗
-            </a>
-
-            <a href="#checker" class="hero-btn secondary-btn">
-                Check My PC
-            </a>
+            <section id="community" class="community-section">
+                <div class="section-heading">
+                    <h2>🌐 ShadowTech Community</h2>
+                    <p>Share your gaming moments with gamers around the world.</p>
+                </div>
+                <div class="community-composer">
+                    <h3>What's happening, gamer?</h3>
+                    <form id="communityPostForm">
+                        <textarea id="communityPostText" placeholder="Share your gaming thoughts, achievements, or questions..." maxlength="500" rows="4" required></textarea>
+                        <div class="community-form-footer">
+                            <span id="communityCharCount">0/500</span>
+                            <button id="communityPostButton" type="submit">Publish Post</button>
+                        </div>
+                    </form>
+                    <p id="communityMessage" role="status"></p>
+                </div>
+                <div class="community-feed-heading">
+                    <h3>Latest Posts</h3>
+                </div>
+                <div id="communityPosts">
+                    <p>Loading community posts...</p>
+                </div>
+            </section>
         </div>
 
-        <div class="hero-stats">
-            <div>
-                <strong>GAMES</strong>
-                <span>Discover new favourites</span>
-            </div>
-
-            <div>
-                <strong>NEWS</strong>
-                <span>Stay in the loop</span>
-            </div>
-
-            <div>
-                <strong>PC CHECK</strong>
-                <span>Know your capabilities</span>
-            </div>
-        </div>
+        <aside class="right-rail">
+            <section class="rail-card community-stats">
+                <h3><span>♧</span> Our Community</h3>
+                <div class="stat-row">
+                    <div><strong>Join</strong><small>Members</small></div>
+                    <div><strong>Live</strong><small>Connect</small></div>
+                    <div><strong>🎮</strong><small>Gaming</small></div>
+                </div>
+            </section>
+            <section class="rail-card trending-rail">
+                <h3><span>🔥</span> Trending Topics</h3>
+                <a href="#trending"><b>#</b> #FC26 <small>Football gaming</small> <span>›</span></a>
+                <a href="#community"><b>#</b> #BestGameEver <small>Community chat</small> <span>›</span></a>
+                <a href="#checker"><b>#</b> #GamingSetup <small>PC builds and tips</small> <span>›</span></a>
+                <a href="#news"><b>#</b> #TechTalk <small>Gaming updates</small> <span>›</span></a>
+            </section>
+            <section class="rail-card online-rail">
+                <h3><i></i> Find Your Gaming Crew</h3>
+                <p>Join the conversation and share your latest gaming moments.</p>
+                <a class="rail-button" href="#community">View Community →</a>
+            </section>
+        </aside>
     </div>
-</section>
 
-
+    <div class="lower-content">
         <section id="games" class="content">
             <h2>🔥 Featured Games</h2>
-
-            
-<div class="game-grid">
-
-    <article class="game-card">
-        <img src="gta5-cover.png" alt="GTA V">
-        <div class="game-info">
-            <span class="game-tag">OPEN WORLD</span>
-            <h3>GTA V</h3>
-            <p>Explore the city, discover missions, and learn more about PC requirements.</p>
-        </div>
-    </article>
-
-    <article class="game-card">
-        <img src="fc26-cover.png" alt="EA SPORTS FC 26">
-        <div class="game-info">
-            <span class="game-tag">FOOTBALL</span>
-            <h3>EA SPORTS FC</h3>
-            <p>Explore football games, gameplay tips, and PC gaming guides.</p>
-        </div>
-    </article>
-
-    <article class="game-card">
-        <img src="efootball-cover.png" alt="eFootball">
-        <div class="game-info">
-            <span class="game-tag">FOOTBALL</span>
-            <h3>eFootball</h3>
-            <p>Discover football gaming updates and tips for PC players.</p>
-        </div>
-    </article>
-
-</div>
-
+            <div class="game-grid">
+                <article class="game-card">
+                    <img src="gta5-cover.png" alt="GTA V">
+                    <div class="game-info">
+                        <span class="game-tag">OPEN WORLD</span>
+                        <h3>GTA V</h3>
+                        <p>Explore the city, discover missions, and learn more about PC requirements.</p>
+                    </div>
+                </article>
+                <article class="game-card">
+                    <img src="fc26-cover.png" alt="EA SPORTS FC 26">
+                    <div class="game-info">
+                        <span class="game-tag">FOOTBALL</span>
+                        <h3>EA SPORTS FC</h3>
+                        <p>Explore football games, gameplay tips, and PC gaming guides.</p>
+                    </div>
+                </article>
+                <article class="game-card">
+                    <img src="efootball-cover.png" alt="eFootball">
+                    <div class="game-info">
+                        <span class="game-tag">FOOTBALL</span>
+                        <h3>eFootball</h3>
+                        <p>Discover football gaming updates and tips for PC players.</p>
+                    </div>
+                </article>
+            </div>
         </section>
 
-       
-<section id="checker" class="content checker">
-    <h2>💻 PC Game Checker</h2>
-    <p class="checker-intro">
-        Find out whether your PC meets your favourite game's requirements.
-    </p>
+        <section id="checker" class="content checker">
+            <h2>💻 PC Game Checker</h2>
+            <p class="checker-intro">Find out whether your PC meets your favourite game's requirements.</p>
+            <div class="checker-box">
+                <label for="game">Choose your game</label>
+                <select id="game">
+                    <option value="gta5">GTA V (Legacy)</option>
+                    <option value="fifa23">EA SPORTS FIFA 23</option>
+                    <option value="efootball">eFootball</option>
+                </select>
+                <label for="ram">Your RAM</label>
+                <select id="ram">
+                    <option value="4">4 GB</option>
+                    <option value="8">8 GB</option>
+                    <option value="16">16 GB</option>
+                    <option value="32">32 GB</option>
+                </select>
+                <label for="cpu">Your processor</label>
+                <select id="cpu">
+                    <option value="basic">Basic / older processor</option>
+                    <option value="mid" selected>Mid-range processor</option>
+                    <option value="strong">Powerful processor</option>
+                </select>
+                <label for="gpu">Your graphics</label>
+                <select id="gpu">
+                    <option value="integrated">Integrated graphics</option>
+                    <option value="entry">Entry-level dedicated GPU</option>
+                    <option value="gaming">Gaming dedicated GPU</option>
+                </select>
+                <button type="button" class="button" onclick="checkGame()">CHECK MY PC</button>
+                <div id="result" aria-live="polite"></div>
+                <p class="checker-note">This is an approximate screening tool, not a guaranteed compatibility test. Exact CPU and GPU models matter.</p>
+            </div>
+        </section>
 
-    <div class="checker-box">
-        <label for="game">Choose your game</label>
-        <select id="game">
-            <option value="gta5">GTA V (Legacy)</option>
-            <option value="fifa23">EA SPORTS FIFA 23</option>
-            <option value="efootball">eFootball</option>
-        </select>
+        <section id="trending" class="trending-section">
+            <h2>🔥 Trending Games</h2>
+            <p class="section-intro">Discover games gamers are talking about.</p>
+            <div class="trending-controls">
+                <input type="text" id="gameSearch" placeholder="🔍 Search for a game...">
+                <select id="gameCategory">
+                    <option value="all">All Categories</option>
+                    <option value="sports">Sports</option>
+                    <option value="open-world">Open World</option>
+                    <option value="racing">Racing</option>
+                </select>
+            </div>
+            <p id="gameCount">4 games found</p>
+            <div class="trending-grid">
+                <div class="trending-card" data-category="sports">
+                    <div class="trending-icon">⚽</div>
+                    <span class="trend-label">SPORTS</span>
+                    <h3>EA SPORTS FC 26</h3>
+                    <p>Build your team and compete on the pitch.</p>
+                    <a href="https://www.ea.com/games/ea-sports-fc" target="_blank" rel="noopener noreferrer">Explore Game ↗</a>
+                </div>
+                <div class="trending-card" data-category="open-world">
+                    <div class="trending-icon">🚗</div>
+                    <span class="trend-label">OPEN WORLD</span>
+                    <h3>Grand Theft Auto V</h3>
+                    <p>Explore Los Santos in this open-world classic.</p>
+                    <a href="https://www.rockstargames.com/gta-v" target="_blank" rel="noopener noreferrer">Explore Game ↗</a>
+                </div>
+                <div class="trending-card" data-category="sports">
+                    <div class="trending-icon">🎮</div>
+                    <span class="trend-label">FOOTBALL</span>
+                    <h3>eFootball</h3>
+                    <p>Enjoy digital football and build your dream team.</p>
+                    <a href="https://www.konami.com/efootball/" target="_blank" rel="noopener noreferrer">Explore Game ↗</a>
+                </div>
+                <div class="trending-card" data-category="racing">
+                    <div class="trending-icon">🏎️</div>
+                    <span class="trend-label">RACING</span>
+                    <h3>Forza Horizon 5</h3>
+                    <p>Race through beautiful landscapes and open roads.</p>
+                    <a href="https://forza.net/" target="_blank" rel="noopener noreferrer">Explore Game ↗</a>
+                </div>
+            </div>
+        </section>
 
-        <label for="ram">Your RAM</label>
-        <select id="ram">
-            <option value="4">4 GB</option>
-            <option value="8">8 GB</option>
-            <option value="16">16 GB</option>
-            <option value="32">32 GB</option>
-        </select>
-
-        <label for="cpu">Your processor</label>
-        <select id="cpu">
-            <option value="basic">Basic / older processor</option>
-            <option value="mid" selected>Mid-range processor</option>
-            <option value="strong">Powerful processor</option>
-        </select>
-
-        <label for="gpu">Your graphics</label>
-        <select id="gpu">
-            <option value="integrated">Integrated graphics</option>
-            <option value="entry">Entry-level dedicated GPU</option>
-            <option value="gaming">Gaming dedicated GPU</option>
-        </select>
-
-        <button type="button" class="button" onclick="checkGame()">
-            CHECK MY PC
-        </button>
-
-        <div id="result" aria-live="polite"></div>
-
-        <p class="checker-note">
-            This is an approximate screening tool, not a guaranteed compatibility test.
-            Exact CPU and GPU models matter.
-        </p>
+        <section id="news" class="content news-section">
+            <p class="tagline">STAY IN THE GAME</p>
+            <h2>📰 Latest Gaming News</h2>
+            <p class="news-intro">Discover gaming updates, PC tips and the latest releases.</p>
+            <input type="search" id="newsSearch" class="news-search" placeholder="Search gaming articles..." aria-label="Search gaming articles">
+            <div class="news-filters">
+                <button class="news-filter active" data-category="all">All</button>
+                <button class="news-filter" data-category="pc">PC Gaming</button>
+                <button class="news-filter" data-category="releases">New Releases</button>
+                <button class="news-filter" data-category="tips">Tips &amp; Guides</button>
+            </div>
+            <h3 class="live-news-title">🔥 Latest Gaming News</h3>
+            <p id="liveNewsStatus">Loading the latest gaming news...</p>
+            <div id="liveNewsGrid" class="news-grid"></div>
+            <div class="news-grid" id="newsGrid">
+                <article class="news-card" data-category="pc">
+                    <span class="game-tag">PC GAMING</span>
+                    <h3>How to Improve Your PC Gaming Performance</h3>
+                    <p>Learn about graphics settings, storage space and keeping your drivers updated.</p>
+                    <button class="read-more" data-article="performance">Read article →</button>
+                </article>
+                <article class="news-card" data-category="releases">
+                    <span class="game-tag">NEW RELEASES</span>
+                    <h3>How to Discover Upcoming PC Games</h3>
+                    <p>Explore release calendars, official announcements and game demos.</p>
+                    <button class="read-more" data-article="releases">Read article →</button>
+                </article>
+                <article class="news-card" data-category="tips">
+                    <span class="game-tag">TIPS &amp; GUIDES</span>
+                    <h3>5 Things to Check Before Installing a Game</h3>
+                    <p>Check system requirements, available disk space and supported hardware.</p>
+                    <button class="read-more" data-article="install">Read article →</button>
+                </article>
+            </div>
+            <p id="newsEmpty" hidden>No articles found. Try another search.</p>
+            <div id="articleReader" class="article-reader" hidden>
+                <button id="closeArticle" class="news-filter">← Back to news</button>
+                <h3 id="articleTitle"></h3>
+                <div id="articleBody"></div>
+            </div>
+        </section>
     </div>
-</section>
+</main>
 
-     
-<section id="trending" class="trending-section">
-    <h2>🔥 Trending Games</h2>
-    <p class="section-intro">
-        Discover games gamers are talking about.
-    </p>
-<div class="trending-controls">
-    <input
-        type="text"
-        id="gameSearch"
-        placeholder="🔍 Search for a game..."
-    >
+<footer>
+    <p>© 2026 ShadowTech. Built for gamers.</p>
+</footer>
 
-    <select id="gameCategory">
-        <option value="all">All Categories</option>
-        <option value="sports">Sports</option>
-        <option value="open-world">Open World</option>
-        <option value="racing">Racing</option>
-    </select>
-</div>
-<p id="gameCount">4 games found</p>
-    <div class="trending-grid">
-
-        <div class="trending-card" data-category="sports">
-            <div class="trending-icon">⚽</div>
-            <span class="trend-label">SPORTS</span>
-            <h3>EA SPORTS FC 26</h3>
-            <p>Build your team and compete on the pitch.</p>
-            <a href="https://www.ea.com/games/ea-sports-fc"
-               target="_blank" rel="noopener noreferrer">
-                Explore Game ↗
-            </a>
-        </div>
-
-        <div class="trending-card" data-category="open-world">
-            <div class="trending-icon">🚗</div>
-            <span class="trend-label">OPEN WORLD</span>
-            <h3>Grand Theft Auto V</h3>
-            <p>Explore Los Santos in this open-world classic.</p>
-            <a href="https://www.rockstargames.com/gta-v"
-               target="_blank" rel="noopener noreferrer">
-                Explore Game ↗
-            </a>
-        </div>
-
-        <div class="trending-card" data-category="sports">
-            <div class="trending-icon">🎮</div>
-            <span class="trend-label">FOOTBALL</span>
-            <h3>eFootball</h3>
-            <p>Enjoy digital football and build your dream team.</p>
-            <a href="https://www.konami.com/efootball/"
-               target="_blank" rel="noopener noreferrer">
-                Explore Game ↗
-            </a>
-        </div>
-
-        <div class="trending-card" data-category="racing">
-            <div class="trending-icon">🏎️</div>
-            <span class="trend-label">RACING</span>
-            <h3>Forza Horizon 5</h3>
-            <p>Race through beautiful landscapes and open roads.</p>
-            <a href="https://forza.net/"
-               target="_blank" rel="noopener noreferrer">
-                Explore Game ↗
-            </a>
-        </div>
-
-    </div>
-</section>
-   
-<section id="news" class="content news-section">
-    <p class="tagline">STAY IN THE GAME</p>
-    <h2>📰 Latest Gaming News</h2>
-    <p class="news-intro">
-        Discover gaming updates, PC tips and the latest releases.
-    </p>
-
-    <input
-        type="search"
-        id="newsSearch"
-        class="news-search"
-        placeholder="Search gaming articles..."
-        aria-label="Search gaming articles"
-    >
-
-    <div class="news-filters">
-        <button class="news-filter active" data-category="all">All</button>
-        <button class="news-filter" data-category="pc">PC Gaming</button>
-        <button class="news-filter" data-category="releases">New Releases</button>
-        <button class="news-filter" data-category="tips">Tips & Guides</button>
-    </div>
-<h3 class="live-news-title">🔥 Latest Gaming News</h3>
-
-<p id="liveNewsStatus">Loading the latest gaming news...</p>
-
-<div id="liveNewsGrid" class="news-grid"></div>
-    <div class="news-grid" id="newsGrid">
-        <article class="news-card" data-category="pc">
-            <span class="game-tag">PC GAMING</span>
-            <h3>How to Improve Your PC Gaming Performance</h3>
-            <p>Learn about graphics settings, storage space and keeping your drivers updated.</p>
-            <button class="read-more" data-article="performance">Read article →</button>
-        </article>
-
-        <article class="news-card" data-category="releases">
-            <span class="game-tag">NEW RELEASES</span>
-            <h3>How to Discover Upcoming PC Games</h3>
-            <p>Explore release calendars, official announcements and game demos.</p>
-            <button class="read-more" data-article="releases">Read article →</button>
-        </article>
-
-        <article class="news-card" data-category="tips">
-            <span class="game-tag">TIPS & GUIDES</span>
-            <h3>5 Things to Check Before Installing a Game</h3>
-            <p>Check system requirements, available disk space and supported hardware.</p>
-            <button class="read-more" data-article="install">Read article →</button>
-        </article>
-    </div>
-
-    <p id="newsEmpty" hidden>No articles found. Try another search.</p>
-
-    <div id="articleReader" class="article-reader" hidden>
-        <button id="closeArticle" class="news-filter">← Back to news</button>
-        <h3 id="articleTitle"></h3>
-        <div id="articleBody"></div>
-    </div>
-</section>
-
-    </main>
-
-    <footer>
-        <p>© 2026 ShadowTech. Built for gamers.</p>
-    </footer>
-
-    <script src="script.js"></script>
-    <script type="module" src="auth-state.js"></script>
+<script src="script.js"></script>
+<script type="module" src="auth-state.js"></script>
+<script type="module" src="community.js"></script>
 </body>
 </html>
