@@ -1,12 +1,30 @@
 
+/* =========================================
+   SHADOWTECH GAMING - MAIN JAVASCRIPT
+   ========================================= */
+
+
+/* =========================================
+   1. PC GAME CHECKER
+   ========================================= */
+
 function checkGame() {
-    const game = document.getElementById("game").value;
-    const ram = Number(document.getElementById("ram").value);
-    const cpu = document.getElementById("cpu").value;
-    const gpu = document.getElementById("gpu").value;
+    const gameElement = document.getElementById("game");
+    const ramElement = document.getElementById("ram");
+    const cpuElement = document.getElementById("cpu");
+    const gpuElement = document.getElementById("gpu");
     const result = document.getElementById("result");
 
-    // Approximate screening profiles, not official requirements.
+    if (!gameElement || !ramElement || !cpuElement ||
+        !gpuElement || !result) {
+        return;
+    }
+
+    const game = gameElement.value;
+    const ram = Number(ramElement.value);
+    const cpu = cpuElement.value;
+    const gpu = gpuElement.value;
+
     const games = {
         gta5: {
             name: "GTA V (Legacy)",
@@ -30,6 +48,11 @@ function checkGame() {
 
     const selected = games[game];
 
+    if (!selected) {
+        result.textContent = "Please select a supported game.";
+        return;
+    }
+
     const cpuScore = {
         basic: 1,
         mid: 2,
@@ -42,37 +65,49 @@ function checkGame() {
         gaming: 3
     };
 
-    let issues = [];
+    const issues = [];
 
     if (ram < selected.ram) {
-        issues.push("Your selected RAM is below the screening threshold.");
+        issues.push("Your selected RAM is below this tool's screening threshold.");
     }
 
-    if (cpuScore[cpu] < cpuScore[selected.cpu]) {
+    if (
+        cpuScore[cpu] === undefined ||
+        cpuScore[cpu] < cpuScore[selected.cpu]
+    ) {
         issues.push("Your processor may be below the expected level.");
     }
 
-    if (gpuScore[gpu] < gpuScore[selected.gpu]) {
+    if (
+        gpuScore[gpu] === undefined ||
+        gpuScore[gpu] < gpuScore[selected.gpu]
+    ) {
         issues.push("Your graphics may be insufficient.");
     }
 
     if (issues.length > 0) {
         result.innerHTML = `
             <h3 style="color:#ffd166">⚠️ Possible Compatibility Issues</h3>
-            <p>${issues.join("<br>")}</p>
-            <p>Check the game's official system requirements
-            before deciding.</p>
+            <p>${issues.map(message =>
+                message.replace(/&/g, "&amp;").replace(/</g, "&lt;")
+            ).join("<br>")}</p>
+            <p>Check the game's official system requirements before deciding.</p>
         `;
     } else {
         result.innerHTML = `
             <h3 style="color:#39ff14">✅ Initial Check Passed!</h3>
-            <p>Your selections meet this tool's basic screening profile
-            for ${selected.name}.</p>
-            <p>This does not guarantee the game will run.
+            <p>Your selections meet this tool's basic screening profile for
+            ${selected.name}.</p>
+            <p>This does not guarantee the game will run smoothly.
             Exact processor and graphics models still need checking.</p>
         `;
     }
 }
+
+
+/* =========================================
+   2. GAMING NEWS ARTICLE READER
+   ========================================= */
 
 const newsArticles = {
     performance: {
@@ -83,6 +118,7 @@ const newsArticles = {
             "Adjust graphics settings if your game runs slowly. Update your graphics drivers using your PC or graphics manufacturer's official tools."
         ]
     },
+
     releases: {
         title: "How to Discover Upcoming PC Games",
         paragraphs: [
@@ -91,6 +127,7 @@ const newsArticles = {
             "Before buying a game, check its system requirements and whether it supports your computer."
         ]
     },
+
     install: {
         title: "5 Things to Check Before Installing a Game",
         paragraphs: [
@@ -113,7 +150,10 @@ const newsGrid = document.getElementById("newsGrid");
 let activeCategory = "all";
 
 function filterNews() {
-    const searchTerm = newsSearch.value.toLowerCase().trim();
+    const searchTerm = newsSearch
+        ? newsSearch.value.toLowerCase().trim()
+        : "";
+
     let visibleCount = 0;
 
     newsCards.forEach(card => {
@@ -125,12 +165,15 @@ function filterNews() {
             card.textContent.toLowerCase().includes(searchTerm);
 
         const visible = matchesCategory && matchesSearch;
+
         card.hidden = !visible;
 
         if (visible) visibleCount++;
     });
 
-    newsEmpty.hidden = visibleCount !== 0;
+    if (newsEmpty) {
+        newsEmpty.hidden = visibleCount !== 0;
+    }
 }
 
 newsFilters.forEach(button => {
@@ -145,18 +188,22 @@ newsFilters.forEach(button => {
     });
 });
 
-newsSearch.addEventListener("input", filterNews);
+if (newsSearch) {
+    newsSearch.addEventListener("input", filterNews);
+}
 
 document.querySelectorAll(".read-more").forEach(button => {
     button.addEventListener("click", () => {
         const article = newsArticles[button.dataset.article];
 
-        if (!article) return;
+        if (!article || !articleReader || !newsGrid) return;
 
-        document.getElementById("articleTitle").textContent =
-            article.title;
-
+        const titleElement = document.getElementById("articleTitle");
         const body = document.getElementById("articleBody");
+
+        if (!titleElement || !body) return;
+
+        titleElement.textContent = article.title;
         body.replaceChildren();
 
         article.paragraphs.forEach(paragraph => {
@@ -167,28 +214,49 @@ document.querySelectorAll(".read-more").forEach(button => {
 
         articleReader.hidden = false;
         newsGrid.hidden = true;
-        newsSearch.hidden = true;
-        document.querySelector(".news-filters").hidden = true;
-        newsEmpty.hidden = true;
+
+        if (newsSearch) newsSearch.hidden = true;
+
+        const filtersContainer = document.querySelector(".news-filters");
+        if (filtersContainer) filtersContainer.hidden = true;
+
+        if (newsEmpty) newsEmpty.hidden = true;
 
         articleReader.scrollIntoView({ behavior: "smooth" });
     });
 });
 
-document.getElementById("closeArticle").addEventListener("click", () => {
-    articleReader.hidden = true;
-    newsGrid.hidden = false;
-    newsSearch.hidden = false;
-    document.querySelector(".news-filters").hidden = false;
+const closeArticleButton = document.getElementById("closeArticle");
 
-    filterNews();
-});
+if (closeArticleButton) {
+    closeArticleButton.addEventListener("click", () => {
+        if (!articleReader || !newsGrid) return;
+
+        articleReader.hidden = true;
+        newsGrid.hidden = false;
+
+        if (newsSearch) newsSearch.hidden = false;
+
+        const filtersContainer = document.querySelector(".news-filters");
+        if (filtersContainer) filtersContainer.hidden = false;
+
+        filterNews();
+    });
+}
 
 filterNews();
+
+
+/* =========================================
+   3. LIVE GAMING NEWS
+   Improved loading, partial results and retry
+   ========================================= */
 
 async function loadLiveGamingNews() {
     const grid = document.getElementById("liveNewsGrid");
     const status = document.getElementById("liveNewsStatus");
+
+    if (!grid || !status) return;
 
     const feeds = [
         {
@@ -201,8 +269,29 @@ async function loadLiveGamingNews() {
         }
     ];
 
+    // Reuse one retry button instead of creating duplicates.
+    let retryButton = document.getElementById("liveNewsRetryButton");
+
+    if (!retryButton) {
+        retryButton = document.createElement("button");
+        retryButton.id = "liveNewsRetryButton";
+        retryButton.type = "button";
+        retryButton.className = "news-retry-button";
+        retryButton.textContent = "Try again";
+
+        status.insertAdjacentElement("afterend", retryButton);
+
+        retryButton.addEventListener("click", loadLiveGamingNews);
+    }
+
+    retryButton.hidden = true;
+    retryButton.disabled = false;
+    status.textContent = "Loading the latest gaming news...";
+    grid.replaceChildren();
+
     try {
-        const results = await Promise.all(
+        // A failed source won't prevent the other source from loading.
+        const results = await Promise.allSettled(
             feeds.map(async feed => {
                 const apiUrl =
                     "https://api.rss2json.com/v1/api.json?rss_url=" +
@@ -211,49 +300,78 @@ async function loadLiveGamingNews() {
                 const response = await fetch(apiUrl);
 
                 if (!response.ok) {
-                    throw new Error("News request failed");
+                    throw new Error(feed.name + " request failed");
                 }
 
                 const data = await response.json();
 
-                if (data.status !== "ok") {
-                    throw new Error("Feed unavailable");
+                if (data.status !== "ok" || !Array.isArray(data.items)) {
+                    throw new Error(feed.name + " feed unavailable");
                 }
 
                 return data.items.map(item => ({
-                    title: item.title,
-                    link: item.link,
-                    description: item.description,
+                    title: item.title || "Untitled gaming article",
+                    link: item.link || "",
+                    description: item.description || "",
                     source: feed.name,
-                    date: item.pubDate
+                    date: item.pubDate || ""
                 }));
             })
         );
 
+        const failedFeeds = results.filter(
+            result => result.status === "rejected"
+        ).length;
+
         const articles = results
-            .flat()
-            .sort((a, b) =>
-                new Date(b.date) - new Date(a.date)
-            )
-            .slice(0, 12);
+            .filter(result => result.status === "fulfilled")
+            .flatMap(result => result.value)
+            .filter(article => article.link)
+            .sort((a, b) => {
+                return (Date.parse(b.date) || 0) -
+                       (Date.parse(a.date) || 0);
+            });
 
-        grid.replaceChildren();
+        // Remove duplicate article links.
+        const uniqueArticles = [
+            ...new Map(
+                articles.map(article => [article.link, article])
+            ).values()
+        ].slice(0, 12);
 
-        articles.forEach(article => {
+        if (uniqueArticles.length === 0) {
+            status.textContent =
+                "Gaming news is temporarily unavailable. Please try again.";
+
+            retryButton.hidden = false;
+            return;
+        }
+
+        uniqueArticles.forEach(article => {
             const card = document.createElement("article");
             card.className = "live-news-card";
 
             const source = document.createElement("p");
+            source.className = "live-news-source";
             source.textContent = "Source: " + article.source;
 
             const title = document.createElement("h3");
             title.textContent = article.title;
 
             const summary = document.createElement("p");
-            const temp = document.createElement("div");
-            temp.innerHTML = article.description || "";
+
+            // Convert RSS HTML descriptions to plain text safely.
+            const parser = new DOMParser();
+            const parsed = parser.parseFromString(
+                article.description,
+                "text/html"
+            );
+
             summary.textContent =
-                (temp.textContent || "").trim().slice(0, 180);
+                (parsed.body.textContent || "")
+                    .replace(/\s+/g, " ")
+                    .trim()
+                    .slice(0, 180);
 
             const link = document.createElement("a");
             link.textContent = "Read full story ↗";
@@ -265,33 +383,57 @@ async function loadLiveGamingNews() {
             grid.appendChild(card);
         });
 
-        status.textContent =
-            `Showing ${articles.length} latest gaming articles.`;
+        if (failedFeeds === 0) {
+            status.textContent =
+                `Showing ${uniqueArticles.length} latest gaming articles.`;
+        } else {
+            status.textContent =
+                `Showing ${uniqueArticles.length} articles. Some news sources are temporarily unavailable.`;
+            retryButton.hidden = false;
+        }
 
     } catch (error) {
-        status.textContent =
-            "News could not load right now. Please try again later.";
         console.error("Gaming news error:", error);
+
+        status.textContent =
+            "Gaming news could not load right now. Please try again.";
+
+        retryButton.hidden = false;
     }
 }
 
 loadLiveGamingNews();
 
+
+/* =========================================
+   4. TRENDING GAMES SEARCH AND FILTERS
+   ========================================= */
+
 const gameSearch = document.getElementById("gameSearch");
 const gameCategory = document.getElementById("gameCategory");
 const trendingCards = document.querySelectorAll(".trending-card");
 
-
 function filterTrendingGames() {
-    const searchText = gameSearch.value.toLowerCase().trim();
-    const selectedCategory = gameCategory.value;
+    const searchText = gameSearch
+        ? gameSearch.value.toLowerCase().trim()
+        : "";
+
+    const selectedCategory = gameCategory
+        ? gameCategory.value
+        : "all";
+
     let visibleGames = 0;
 
     trendingCards.forEach(card => {
-        const gameName = card.querySelector("h3").textContent.toLowerCase();
+        const heading = card.querySelector("h3");
+        const gameName = heading
+            ? heading.textContent.toLowerCase()
+            : "";
+
         const category = card.dataset.category;
 
         const matchesSearch = gameName.includes(searchText);
+
         const matchesCategory =
             selectedCategory === "all" ||
             category === selectedCategory;
@@ -300,16 +442,23 @@ function filterTrendingGames() {
 
         card.hidden = !isVisible;
 
-        if (isVisible) {
-            visibleGames++;
-        }
+        if (isVisible) visibleGames++;
     });
 
-    document.getElementById("gameCount").textContent =
-        `${visibleGames} game${visibleGames === 1 ? "" : "s"} found`;
+    const gameCount = document.getElementById("gameCount");
+
+    if (gameCount) {
+        gameCount.textContent =
+            `${visibleGames} game${visibleGames === 1 ? "" : "s"} found`;
+    }
 }
 
+if (gameSearch) {
+    gameSearch.addEventListener("input", filterTrendingGames);
+}
 
-gameSearch.addEventListener("input", filterTrendingGames);
-gameCategory.addEventListener("change", filterTrendingGames);
+if (gameCategory) {
+    gameCategory.addEventListener("change", filterTrendingGames);
+}
+
 filterTrendingGames();
